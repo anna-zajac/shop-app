@@ -9,10 +9,6 @@ const Product = ({ name, title, basePrice, colors, sizes}) => {
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizes[0].name);
 
-  const prepareColorClassName = color => {
-    return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
-  }
-
   const getPrice = () => {
     const selectedSize = sizes.find(size => size.name === currentSize);
 
@@ -24,10 +20,10 @@ const Product = ({ name, title, basePrice, colors, sizes}) => {
 
     console.log('Summary')
     console.log('============')
-    console.log('Name:' + title)
-    console.log('Price:' + getPrice)
-    console.log('Size' + currentSize)
-    console.log('Color' + currentColor)
+    console.log('Name: ' + title)
+    console.log('Price: ' + getPrice())
+    console.log('Size: ' + currentSize)
+    console.log('Color ' + currentColor)
   }
 
   return (
@@ -44,8 +40,9 @@ const Product = ({ name, title, basePrice, colors, sizes}) => {
         currentColor={currentColor}
         setCurrentColor={setCurrentColor}
         setCurrentSize={setCurrentSize}
-        prepareColorClassName={prepareColorClassName}
-        getPrice={getPrice} />
+        getPrice={getPrice}
+        sizes={sizes}
+        colors={colors} />
       </div>
     </article>
   )
