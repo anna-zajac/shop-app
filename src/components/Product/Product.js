@@ -3,17 +3,18 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import ProductImage from './ProductImage/ProductImage';
 import ProductForm from './ProductForm/ProductForm';
+import { useMemo } from 'react/cjs/react.production.min';
 
 const Product = ({ name, title, basePrice, colors, sizes}) => {
 
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizes[0].name);
 
-  const getPrice = () => {
+  const getPrice = useMemo(() => {
     const selectedSize = sizes.find(size => size.name === currentSize);
 
     return basePrice + selectedSize.additionalPrice;
-  };
+  }, [currentSize, sizes, basePrice]);
 
   const handleSubmit = e => {
     e.preventDefault();
